@@ -25,5 +25,5 @@ Client:
 		- check that the data is the same
     
     
-  # To compile the code use:   clang -framework Foundation main.m -o Server/Client or just run it from xcode.
-  # Or just run it with xcode
+    # To compile the code use: clang -framework Foundation main.m -o Server/Client
+    # Or just run it with xcode
