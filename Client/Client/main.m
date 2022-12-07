@@ -19,7 +19,6 @@
 #include <unistd.h>
 #define MS_IN_S 1000
 
-
 // Message structure:
 typedef struct {
   mach_msg_header_t header;
@@ -31,7 +30,6 @@ typedef struct {
   Message message;
  mach_msg_trailer_t trailer;
 } ReceiveMessage;
-
 
 // Receive message routine:
  mach_msg_return_t
@@ -47,11 +45,11 @@ typedef struct {
   if (ret != MACH_MSG_SUCCESS) {
     return ret;
   }
-  
-  // Print the server response:
+
+// Print the server response:
     Message *message = &receiveMessage->message;
     printf("\n\n (*) Message successfuly sent!\n\n");
-    printf(" Server response :\n %s\n", message->Message_Body);
+    printf("\n\n Server response :\n\n %s\n", message->Message_Body);
     printf(" \n (*) Message has been saved!\n");
     return MACH_MSG_SUCCESS;
 }
@@ -86,24 +84,23 @@ int main(){
         KERN_SUCCESS) {
         return EXIT_FAILURE;
     }
-    
-    
+
 // Setup message header:
     Message message = {0};
     message.header.msgh_remote_port = port;
     message.header.msgh_local_port = replyPort;
-    message.header.msgh_bits = MACH_MSGH_BITS_SET(
-              /* remote */ MACH_MSG_TYPE_COPY_SEND,
-              /* local */ MACH_MSG_TYPE_MAKE_SEND,
-              /* voucher */ 0,
-              /* other */ 0);
     message.header.msgh_id = processID;
     message.header.msgh_size = sizeof(message);
+    message.header.msgh_bits =MACH_MSGH_BITS_SET(
+   /* remote */ MACH_MSG_TYPE_COPY_SEND,
+   /* local */ MACH_MSG_TYPE_MAKE_SEND,
+   /* voucher */ 0,
+   /* other */ 0);
+
 
 // Message body:
-    NSString*msg1=@"MACH MESSAGE #1 !";
-    
-    
+    NSString*msg1=@"MACH MESSAGE #1 ";
+ 
 
     const char *msg1char=[msg1 cStringUsingEncoding:NSUTF8StringEncoding];
     strcpy(message.Message_Body,msg1char);
@@ -118,7 +115,7 @@ int main(){
       /* recv_name */ MACH_PORT_NULL,
       /* timeout */ MACH_MSG_TIMEOUT_NONE,
       /* notify port */ MACH_PORT_NULL);
-       printf("\n\n Client message :\n %s", msg1char);
+       printf("\n\n Client message :\n\n %s", msg1char);
     
 
 // Check that the data is the same:
@@ -148,7 +145,7 @@ printf("--------------------------- TIMED OUT ! ----------------------------\n")
   }
 
 // Message body #2:
-   NSString *msg2=@"\n\n MACH MESSAGE #2 !";
+   NSString *msg2=@"MACH MESSAGE #2 ";
         
         
         
@@ -165,7 +162,7 @@ printf("--------------------------- TIMED OUT ! ----------------------------\n")
       /* recv_name */ MACH_PORT_NULL,
       /* timeout */ MACH_MSG_TIMEOUT_NONE,
       /* notify port */ MACH_PORT_NULL);
-        printf("\n\n Client message :\n %s", msg2char);
+        printf("\n\n Client message :\n\n  %s", msg2char);
 
 // Check that the data is the same:
         ReceiveMessage rcvMessage = {0};
@@ -199,6 +196,4 @@ printf("--------------------------- TIMED OUT ! ----------------------------\n")
     
   return 0;
 }
-    
-
     
