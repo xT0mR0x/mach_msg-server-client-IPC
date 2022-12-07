@@ -118,6 +118,6 @@ int main(){
       /* recv_name */ MACH_PORT_NULL,
       /* timeout */ MACH_MSG_TIMEOUT_NONE,
       /* notify port */ MACH_PORT_NULL);
-       printf("\n\n Client message :\n %s", msg1char);
+       printf("\n\n Client message :\n %x", msg1char);
     
     
