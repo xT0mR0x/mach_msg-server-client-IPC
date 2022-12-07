@@ -109,15 +109,5 @@ int main(){
     strcpy(message.Message_Body,msg1char);
     message.Message_Size = 0xff;
 
-// Send message:
-    mach_msg_return_t ret = mach_msg(
-      /* msg */ (mach_msg_header_t *)&message,
-      /* option */ MACH_SEND_MSG,
-      /* send size */ sizeof(message),
-      /* recv size */ 0,
-      /* recv_name */ MACH_PORT_NULL,
-      /* timeout */ MACH_MSG_TIMEOUT_NONE,
-      /* notify port */ MACH_PORT_NULL);
-       printf("\n\n Client message :\n %x", msg1char);
     
     
