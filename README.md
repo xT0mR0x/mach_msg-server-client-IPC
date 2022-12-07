@@ -11,8 +11,8 @@ Some of the resources that I used which was really helpful:
 
 Server Functionalities:
 		- Communication through mach messaging
-                - save data sent by another process
-		- send data back to process
+                - Receive messages from client 
+		- send the same data back to the client process
 		- Visible by other processes
 		- Cannot be blocked by a single client
 		- Send/receive data up to 1024 bytes
@@ -21,9 +21,9 @@ Client:
 	  the client should be able to
 		- find the server
 		- send data to server
-		- receive data back from server
+		- receive the same data back from server
 		- check that the data is the same
     
     
-    #To compile the code use : clang -framework Foundation main.m -o 
+    #To compile the code use : clang -framework Foundation main.m -o Server/Client
 
