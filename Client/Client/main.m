@@ -86,3 +86,19 @@ int main(){
         KERN_SUCCESS) {
         return EXIT_FAILURE;
     }
+    
+    
+// Setup message header:
+    Message message = {0};
+    message.header.msgh_remote_port = port;
+    message.header.msgh_local_port = replyPort;
+    message.header.msgh_bits = MACH_MSGH_BITS_SET(
+              /* remote */ MACH_MSG_TYPE_COPY_SEND,
+              /* local */ MACH_MSG_TYPE_MAKE_SEND,
+              /* voucher */ 0,
+              /* other */ 0);
+    message.header.msgh_id = processID;
+    message.header.msgh_size = sizeof(message);
+
+// Message body:
+    NSString*msg1=@"MACH MESSAGE #1 !";
