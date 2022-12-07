@@ -105,4 +105,100 @@ int main(){
     
     
 
+    const char *msg1char=[msg1 cStringUsingEncoding:NSUTF8StringEncoding];
+    strcpy(message.Message_Body,msg1char);
+    message.Message_Size = 0xff;
+
+// Send message:
+    mach_msg_return_t ret = mach_msg(
+      /* msg */ (mach_msg_header_t *)&message,
+      /* option */ MACH_SEND_MSG,
+      /* send size */ sizeof(message),
+      /* recv size */ 0,
+      /* recv_name */ MACH_PORT_NULL,
+      /* timeout */ MACH_MSG_TIMEOUT_NONE,
+      /* notify port */ MACH_PORT_NULL);
+       printf("\n\n Client message :\n %s", msg1char);
+    
+
+// Check that the data is the same:
+    ReceiveMessage rcvMessage = {0};
+    while (ret == MACH_MSG_SUCCESS) {
+    ret = receive_msg(replyPort, /* timeout */ 1 * MS_IN_S, &rcvMessage);
+        if (ret == MACH_MSG_SUCCESS){
+            if (strcmp(message.Message_Body, rcvMessage.message.Message_Body)==0)
+                printf(" (*) Send/Receive is equal!\n\n");
+            else printf(" Send/Receive is NOT equal\n\n");
+                }
+
+// Set timeout condition:
+        if (ret == MACH_RCV_TIMED_OUT) {
+        } else if (ret != MACH_MSG_SUCCESS) {
+         printf("Failed mach_msg: %d\n", ret);
+         return EXIT_FAILURE;}
+  else {
+    ret = receive_msg(replyPort, /* timeout */ 1 * MS_IN_S, &rcvMessage);
+  }
+
+  if (ret == MACH_RCV_TIMED_OUT) {
+printf("--------------------------- TIMED OUT ! ----------------------------\n");
+  } else if (ret != MACH_MSG_SUCCESS) {
+    printf("Failed to receive a message: %#x\n", ret);
+    return 1;
+  }
+
+// Message body #2:
+   NSString *msg2=@"\n\n MACH MESSAGE #2 !";
+        
+        
+        
+    const char *msg2char=[msg2 cStringUsingEncoding:NSUTF8StringEncoding];
+    strcpy(message.Message_Body,msg2char);
+    message.Message_Size = 0xff;
+    
+// Send message #2:
+      ret = mach_msg(
+      /* msg */ (mach_msg_header_t *)&message,
+      /* option */ MACH_SEND_MSG,
+      /* send size */ sizeof(message),
+      /* recv size */ 0,
+      /* recv_name */ MACH_PORT_NULL,
+      /* timeout */ MACH_MSG_TIMEOUT_NONE,
+      /* notify port */ MACH_PORT_NULL);
+        printf("\n\n Client message :\n %s", msg2char);
+
+// Check that the data is the same:
+        ReceiveMessage rcvMessage = {0};
+        while (ret == MACH_MSG_SUCCESS) {
+        ret = receive_msg(replyPort, /* timeout */ 1 * MS_IN_S, &rcvMessage);
+        if (ret == MACH_MSG_SUCCESS){
+         if (strcmp(message.Message_Body, rcvMessage.message.Message_Body)==0)
+                printf(" (*) Send/Receive is equal!\n\n");
+           else printf(" Send/Receive is NOT equal\n\n");}
+    
+        }
+    }
+// Set timeout condition
+    if (ret == MACH_RCV_TIMED_OUT) {
+    } else if (ret != MACH_MSG_SUCCESS) {
+     printf("Failed mach_msg: %d\n", ret);
+     return EXIT_FAILURE;
+  }
+
+  else {
+    ret = receive_msg(replyPort, /* timeout */ 1 * MS_IN_S, &rcvMessage);
+  }
+
+  if (ret == MACH_RCV_TIMED_OUT) {
+printf("--------------------------- TIMED OUT ! ----------------------------\n");
+  } else if (ret != MACH_MSG_SUCCESS) {
+    printf("Failed to receive a message: %#x\n", ret);
+    return 1;
+  }
+    
+    
+  return 0;
+}
+    
+
     
