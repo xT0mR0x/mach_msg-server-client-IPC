@@ -4,8 +4,6 @@
 //
 //  Created by Tom Rosenzweig on 07/12/2022.
 //
-
-
 #include <bootstrap.h>
 #include <mach/message.h>
 #include <mach/mach_init.h>
@@ -33,7 +31,8 @@ typedef struct {
 
 // Receive message routine:
  mach_msg_return_t
- receive_msg(mach_port_name_t recvPort, mach_msg_timeout_t timeout,ReceiveMessage *receiveMessage) {
+ receive_msg(mach_port_name_t recvPort,
+ mach_msg_timeout_t timeout,ReceiveMessage *receiveMessage) {
   mach_msg_return_t ret = mach_msg(
       /* msg */ (mach_msg_header_t *)receiveMessage,
       /* option */ MACH_RCV_MSG | MACH_RCV_TIMEOUT,
@@ -61,20 +60,23 @@ int main(){
     NSProcessInfo *processInfo=[NSProcessInfo processInfo];
     int processID=[processInfo processIdentifier];
     mach_port_t bootstrapPort;
-    if (task_get_special_port(task, TASK_BOOTSTRAP_PORT, &bootstrapPort) !=
+    if (task_get_special_port
+    (task, TASK_BOOTSTRAP_PORT, &bootstrapPort) !=
         KERN_SUCCESS) {
         return EXIT_FAILURE;
         
     }
 // Retrieve the bootstrap port:
     mach_port_t port;
-    if (bootstrap_look_up(bootstrapPort, "this.is.the.client.name", &port) !=
+    if (bootstrap_look_up
+    (bootstrapPort, "this.is.the.client.name", &port) !=
         KERN_SUCCESS) {
         return EXIT_FAILURE;
     }
 // Query bootstrap for the service port
     mach_port_t replyPort;
-    if (mach_port_allocate(task, MACH_PORT_RIGHT_RECEIVE, &replyPort) !=
+    if (mach_port_allocate
+    (task, MACH_PORT_RIGHT_RECEIVE, &replyPort) !=
         KERN_SUCCESS) {
         return EXIT_FAILURE;
     }
@@ -137,7 +139,7 @@ int main(){
   }
 
   if (ret == MACH_RCV_TIMED_OUT) {
-printf("--------------------------- TIMED OUT ! ----------------------------\n");
+printf("-- TIMED OUT ! --\n");
   } else if (ret != MACH_MSG_SUCCESS) {
     printf("Failed to receive a message: %#x\n", ret);
     return 1;
@@ -186,7 +188,7 @@ printf("--------------------------- TIMED OUT ! ----------------------------\n")
   }
 
   if (ret == MACH_RCV_TIMED_OUT) {
-printf("--------------------------- TIMED OUT ! ----------------------------\n");
+printf("-- TIMED OUT ! --\n");
   } else if (ret != MACH_MSG_SUCCESS) {
     printf("Failed to receive a message: %#x\n", ret);
     return 1;
