@@ -18,6 +18,16 @@
 #include <stdlib.h>
 #include <unistd.h>
 #define MS_IN_S 1000
+#define we \
+  we we we we we we we we we we we we we we we we we we we we we we we we we \
+  we we we we we we we we we we we we we we we we we we we we we we we we we \
+  we we we we we we we we we we we we we we we we we we we we we we we we we \
+  we we we we we we we we we we we we we we we we we we we we we we we we we
+
+
+
+
+
 
 // Message structure:
 typedef struct {
