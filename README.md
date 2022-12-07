@@ -23,4 +23,6 @@ Client:
 		- receive data back from server
 		- check that the data is the same
     
+    
+    #To compile the code use : clang -framework Foundation main.m -o 
 
