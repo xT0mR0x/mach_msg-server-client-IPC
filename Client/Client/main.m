@@ -20,5 +20,14 @@
 #define MS_IN_S 1000
 
 
-}
-    
+// Message structure:
+typedef struct {
+  mach_msg_header_t header;
+  char Message_Body[1024];
+  int Message_Size;
+} Message;
+
+typedef struct {
+  Message message;
+ mach_msg_trailer_t trailer;
+} ReceiveMessage;
