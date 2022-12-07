@@ -3,8 +3,6 @@
 //  Client
 //
 //  Created by Tom Rosenzweig
-//
-
 
 #include <bootstrap.h>
 #include <mach/message.h>
@@ -100,8 +98,6 @@ int main(){
 
 // Message body:
     NSString*msg1=@"MACH MESSAGE #1 ";
- 
-
     const char *msg1char=[msg1 cStringUsingEncoding:NSUTF8StringEncoding];
     strcpy(message.Message_Body,msg1char);
     message.Message_Size = 0xff;
@@ -146,9 +142,6 @@ printf("--------------------------- TIMED OUT ! ----------------------------\n")
 
 // Message body #2:
    NSString *msg2=@"MACH MESSAGE #2 ";
-        
-        
-        
     const char *msg2char=[msg2 cStringUsingEncoding:NSUTF8StringEncoding];
     strcpy(message.Message_Body,msg2char);
     message.Message_Size = 0xff;
