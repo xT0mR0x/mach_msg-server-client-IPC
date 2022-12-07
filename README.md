@@ -9,7 +9,6 @@ Some of the resources that I used which was really helpful:
 - Damian Malarczyk Mach_msg tutorial - https://dmcyk.xyz
 
 
-
 Server Functionalities:
 		- Communication through mach messaging
     - save data sent by another process
