@@ -105,9 +105,4 @@ int main(){
     
     
 ;
-    const char *msg1char=[msg1 cStringUsingEncoding:NSUTF8StringEncoding];
-    strcpy(message.Message_Body,msg1char);
-    message.Message_Size = 0xff;
-
-    
     
