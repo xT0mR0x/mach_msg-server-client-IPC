@@ -20,19 +20,23 @@ Some of the resources that I used which was really helpful:
 
 
 Server Functionalities:
-		- Communication through mach messaging
-                - Receive messages from client 
-		- send the same data back to the client process
-		- Visible by other processes
-		- Cannot be blocked by a single client
-		- Send/receive data up to 1024 bytes
+		- Communication through mach messaging.
+                - Receive messages from client.
+		- Send the same data back to the client process.
+		- The server will create a file in the documents folder whenever a message received
+		- Save the messgae content to the file.
+		- The file will be saved under the process ID name which is represent the Client ID.
+		- If the server will get the same data, the file will be deleted automatically.
+		- Visible by other processes.
+		- Cannot be blocked by a single client.
+		- Send/receive data up to 1024 bytes.
 
 Client:
 	  the client should be able to
-		- find the server
-		- send data to server
-		- receive the same data back from server
-		- check that the data is the same
+		- find the server.
+		- send data to server.
+		- receive the same data back from server.
+		- check that the data is the same.
     
     
     # To compile the code use: clang -framework Foundation main.m  
