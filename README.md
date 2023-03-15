@@ -48,8 +48,6 @@ Mach IPC (Inter-Process Communication) is a messaging system used to exchange da
 ## machmsg
 machmsg is the core building block of Mach's IPC, designed to pass between any two ports, whether local or remote. Tasks send messages to ports, and the messages are delivered and received in the order they were sent.
 
-----------------------------------
-
 # SERVER:
 
 ## Message Structure:
